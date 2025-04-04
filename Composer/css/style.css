@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Iceberg", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: gold;
+    text-shadow: 1px 1px 1px white;
+}
+
+#section1 {
+    display: flex;
+    justify-content: center;
+}
+
+#section1 img {
+    width: 300px;
+}
+
+#section2 {
+    display: flex;
+    justify-content: center;
+}
+
+#section2 img {
+    width: 180px;
+}
