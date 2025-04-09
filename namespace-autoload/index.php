@@ -1,7 +1,7 @@
 <?php
 
 require_once './vendor/autoload.php';
-use App\Controle\ControleCliente;
+// use App\Controle\ControleCliente;
 
 $router = new Bramus\Router\Router();
 
@@ -10,7 +10,7 @@ $router->get('/', function () {
 });
 
 $router->setNamespace('\App\Controle');
-$router->get('/clientes/novo', 'ControleCliente@cadastrar');
+$router->get('/inserir', 'ControleCliente@inserir');
 $router->get('/clientes', 'ControleCliente@listar');
 $router->get('/clientes/novo', 'ControleCliente@editar');
 $router->get('/clientes/novo', 'ControleCliente@deletar');
