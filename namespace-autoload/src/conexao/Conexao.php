@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Modelo2;
 class Conexao
 {
     private static $dsn = 'mysql:host=localhost;port=3306;dbname=dew2025';
