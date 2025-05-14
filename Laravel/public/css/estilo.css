@@ -1,0 +1,20 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+}
+
+#form2 {
+    border: 1px solid black;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.37);
+    background-color: black;
+    color: #eee;
+    padding: 32px;
+    border-radius: 8px;
+}
+
+span {
+    color: green;
+}
