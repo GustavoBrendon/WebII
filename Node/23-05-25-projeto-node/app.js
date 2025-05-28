@@ -5,9 +5,26 @@ import film_router from "./routes/film_router.js";
 
 const app = express();
 app.use(express.json());
-// app.use("/", (req, res) => {
-//     res.end('Rodando.');
+
+
+// app.use((req,res,next) => {
+//     console.log('F1');
+//     next();
 // });
+
+// app.use((req,res,next) => {
+//     console.log('F2');
+//     next();
+// });
+
+// app.use((req,res,next) => {
+//     console.log('F3');
+//     next();
+// });
+
+app.get("/", (req, res) => {
+    res.end('Rodando.');
+});
 
 app.use('/films', film_router);
 
