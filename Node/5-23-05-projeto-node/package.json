@@ -9,7 +9,7 @@
     "dev": "nodemon ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Gustavo Brendon",
+  "author": "Rosinei Figueiredo",
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0",
