@@ -1,5 +1,5 @@
-import Motorista from "../models/motorista.js";
-import Carro from "../models/carro.js";
+import Motorista from "../../models/motorista.js";
+import Carro from "../../models/carro.js";
 
 async function createMotorista(req, res) {
     const motorista = await Motorista.create({
@@ -10,7 +10,7 @@ async function createMotorista(req, res) {
 }
 
 async function listMotoristas(req, res) {
-    const list = await Motorista.findAll({ include: [Actor, Director], raw: true });
+    const list = await Motorista.findAll({ include: [Carro], raw: true });
     res.render('motoristas/motoristas', { motoristas: list });
 }
 

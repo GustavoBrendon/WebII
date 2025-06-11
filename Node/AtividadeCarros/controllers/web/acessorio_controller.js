@@ -1,5 +1,5 @@
-import Acessorio from "../models/acessorio.js";
-import Carro from "../models/carro.js";
+import Acessorio from "../../models/acessorio.js";
+import Carro from "../../models/carro.js";
 
 async function createAcessorio(req, res) {
     const acessorio = await Acessorio.create({
@@ -10,7 +10,7 @@ async function createAcessorio(req, res) {
 }
 
 async function listAcessorios(req, res) {
-    const list = await Acessorio.findAll({ include: [Actor, Director], raw: true });
+    const list = await Acessorio.findAll({ include: [Carro], raw: true });
     res.render('acessorios/acessorios', { acessorios: list });
 }
 
@@ -36,4 +36,4 @@ async function deleteAcessorio(req, res) {
     res.render('alerts', { title: 'Acessorios', body: 'Acessorio deletado.' });
 }
 
-export { createAcessorio, listAcessorios, editAcessorio, deleteAcessorio };
+export { createAcessorio, listAcessorios, editAcessorio, saveAcessorio, deleteAcessorio };

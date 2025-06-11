@@ -1,6 +1,6 @@
-import Carro from "../models/carro.js";
-import Motorista from "../models/motorista.js";
-import Acessorio from "../models/acessorio.js";
+import Carro from "../../models/carro.js";
+import Motorista from "../../models/motorista.js";
+import Acessorio from "../../models/acessorio.js";
 
 async function createCarro(req, res) {
   const acessorios = [];
