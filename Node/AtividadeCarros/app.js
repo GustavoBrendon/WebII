@@ -1,11 +1,9 @@
 import express from 'express';
 import syncer from './database/syncer.js';
-import film_router from './routers/carro_router.js';
-import actor_router from './routers/motorista_router.js';
-import director_router from './routers/acessorio_router.js';
 import acessorio_router from './routers/acessorio_router.js';
 import motorista_router from './routers/motorista_router.js';
 import carro_router from './routers/carro_router.js';
+import { create } from 'express-handlebars';
 
 if(!syncer()){
     process.exit();
@@ -13,11 +11,22 @@ if(!syncer()){
 
 const app = express();
 
+const hbs = create({
+    extname: '.handlebars',
+    defaultLayout: 'main',
+    layoutsDir: 'views/layouts/',
+    partialsDir: 'views/partials/'
+});
+
 app.use(express.json());
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+app.set('views', './views');
 
 app.get('/', (req, res) => {
-    res.end('Rodando');
+    res.render('home');
 });
+
 app.use('/carros', carro_router);
 app.use('/acessorios', acessorio_router);
 app.use('/motoristas', motorista_router);
