@@ -11,7 +11,7 @@ async function createMotorista(req, res) {
 
 async function listMotoristas(req, res) {
     const list = await Motorista.findAll({ include: [Carro], raw: true });
-    res.render('motoristas/motoristas', { motoristas: list });
+    res.render('motoristas/motoristas', { motoristas: list});
 }
 
 async function editMotorista(req, res) {

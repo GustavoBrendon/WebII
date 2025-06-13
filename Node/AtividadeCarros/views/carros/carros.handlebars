@@ -17,10 +17,21 @@
     <input type="number" id="ano" name="ano" value="{{carro_editing.ano}}" required><br><br>
 
     <label for="MotoristaId">Motoristas</label><br>
-    <input type="number" id="MotoristaId" name="MotoristaId" value="{{carro_editing.MotoristaId}}"><br><br>
+    <select name="MotoristaId" id="MotoristaId">
+        {{#each motoristas}}
+            <option value="{{this.id}}" {{#if (eq this.id ../carro_editing.MotoristId)}}selected{{/if}}>{{this.nome}}</option>
+        {{/each}}
+    </select><br><br>
+        
+    {{!-- <input type="number" id="MotoristaId" name="MotoristaId" value="{{carro_editing.MotoristaId}}"><br><br> --}}
 
-    <label for="acessorios">Acessorios</label><br>
-    <input type="text" id="acessorios" name="acessorios" value="{{carro_editing.acessorios}}"><br><br>
+    <label>Acessorios</label><br>
+        {{#each acessorios}}
+            <input type="checkbox" id="acessorio{{this.id}}"  
+             name="acessorios" value="{{this.id}}">
+             <label for="acessorio{{this.id}}">{{this.nome}}</label><br><br>
+        {{/each}}
+    {{!-- <input type="text" id="acessorios" name="acessorios" value="{{carro_editing.acessorios}}"><br><br> --}}
 
     <button>{{#if action }}Editar{{else}}Criar{{/if}}</button>
 
@@ -44,7 +55,7 @@
 
             <th>Ano</th>
 
-            <th>MotoristaId</th>
+            <th>Motorista</th>
 
             <th>Acessorios</th>
 
@@ -69,9 +80,12 @@
 
             <td>{{this.ano}}</td>
 
-            <td>{{this.MotoristaId}}</td>
+            <td>{{this.Motoristum.nome}}</td>
 
-            <td>{{this.Acessorios}}</td>
+            <td>{{#each this.Acessorios}}
+                {{this.nome}} 
+                {{#unless @last}} - {{/unless}}
+                {{/each}}</td>
 
             <td style="display: flex; justify-content: space-evenly;">
 

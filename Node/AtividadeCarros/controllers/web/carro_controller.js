@@ -14,42 +14,58 @@ async function createCarro(req, res) {
     fabricante: req.body.fabricante,
     preco: req.body.preco,
     ano: req.body.ano,
-    MotoristaId: req.body.MotoristaId,
+    MotoristumId: req.body.MotoristaId,
   });
   await carro.addAcessorios(acessorios);
-  res.render('alerts', { title: 'Carros', body: 'Carro criado.' });
+  res.render("alerts", { title: "Carros", body: "Carro criado." });
 }
 
 async function listCarros(req, res) {
-    const list = await Carro.findAll({ include: [Acessorio, Motorista], raw: true });
-    res.render('carros/carros', { carros: list });
+  const list = await Carro.findAll({ include: [Acessorio, Motorista] });
+  const list_processed = list.map((carro) => {
+    return carro.toJSON();
+  });
+  const motorista = await Motorista.findAll({ raw: true });
+  const acessorios = await Acessorio.findAll({ raw: true });
+  res.render("carros/carros", {
+    carros: list_processed,
+    motoristas: motorista,
+    acessorios: acessorios
+  });
 }
 
 async function editCarro(req, res) {
-    const carro = await Carro.findOne({ where: { id: req.body.id } });
-    res.render('carros/carros', { action: 'edit', carro_editing: carro.dataValues });
+  const carro = await Carro.findOne({ where: { id: req.body.id }, include: Acessorio });
+  const carro_edit = carro.toJSON();
+  const motorista = await Motorista.findAll({ raw: true });
+  const acessorios = await Acessorio.findAll({ raw: true });
+  carro.acessorios = carro.Acessorios.map((ac)=>{return ac.id;});
+  res.render("carros/carros", {
+    action: "edit",
+    carro_editing: carro.dataValues,
+    motoristas: motorista, 
+    acessorios: acessorios
+  });
 }
 
 async function saveCarro(req, res) {
+  const carro = await Carro.findOne({ where: { id: req.body.id } });
 
-    const carro = await Carro.findOne({ where: { id: req.body.id } });
-
-    carro.marca = req.body.marca,
-    carro.modelo= req.body.modelo,
-    carro.fabricante= req.body.fabricante,
-    carro.preco= req.body.preco,
-    carro.ano= req.body.ano,
-    carro.MotoristaId= req.body.MotoristaId,
+  (carro.marca = req.body.marca),
+    (carro.modelo = req.body.modelo),
+    (carro.fabricante = req.body.fabricante),
+    (carro.preco = req.body.preco),
+    (carro.ano = req.body.ano),
+    (carro.MotoristumId = req.body.MotoristaId),
     await carro.save();
 
-    res.render('alerts', { title: 'Carros', body: 'Carro Editado.' });
-
+  res.render("alerts", { title: "Carros", body: "Carro Editado." });
 }
 
 async function deleteCarro(req, res) {
-    const carro = await Carro.findOne({ where: { id: req.body.id } });
-    await carro.destroy();
-    res.render('alerts', { title: 'Carros', body: 'Carro deletado.' });
+  const carro = await Carro.findOne({ where: { id: req.body.id } });
+  await carro.destroy();
+  res.render("alerts", { title: "Carros", body: "Carro deletado." });
 }
 
 export { createCarro, listCarros, editCarro, saveCarro, deleteCarro };
