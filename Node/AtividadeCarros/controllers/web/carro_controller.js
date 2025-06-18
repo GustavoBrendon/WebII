@@ -36,29 +36,33 @@ async function listCarros(req, res) {
 
 async function editCarro(req, res) {
   const carro = await Carro.findOne({ where: { id: req.body.id }, include: Acessorio });
-  const carro_edit = carro.toJSON();
+  const carro_editing = carro.toJSON();
   const motorista = await Motorista.findAll({ raw: true });
   const acessorios = await Acessorio.findAll({ raw: true });
-  carro.acessorios = carro.Acessorios.map((ac)=>{return ac.id;});
+  carro_editing.acessorios = carro_editing.Acessorios.map((ac)=>{return ac.id;});
   res.render("carros/carros", {
     action: "edit",
-    carro_editing: carro.dataValues,
+    carro_editing: carro_editing,
     motoristas: motorista, 
     acessorios: acessorios
   });
 }
 
 async function saveCarro(req, res) {
+  const acessorios = [];
+  for (let i = 0; i < req.body.acessorios.length; i++) {
+    const acessorio = await Acessorio.findByPk(req.body.acessorios[i]);
+    acessorios.push(acessorio);
+  }
   const carro = await Carro.findOne({ where: { id: req.body.id } });
-
-  (carro.marca = req.body.marca),
+    (carro.marca = req.body.marca),
     (carro.modelo = req.body.modelo),
     (carro.fabricante = req.body.fabricante),
     (carro.preco = req.body.preco),
     (carro.ano = req.body.ano),
     (carro.MotoristumId = req.body.MotoristaId),
     await carro.save();
-
+    await carro.setAcessorios(acessorios);
   res.render("alerts", { title: "Carros", body: "Carro Editado." });
 }
 

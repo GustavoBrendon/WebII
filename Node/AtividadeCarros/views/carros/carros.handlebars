@@ -28,7 +28,7 @@
     <label>Acessorios</label><br>
         {{#each acessorios}}
             <input type="checkbox" id="acessorio{{this.id}}"  
-             name="acessorios" value="{{this.id}}">
+             name="acessorios" value="{{this.id}}" {{#if (contains ../carro_editing.acessorios this.id)}}checked{{/if}}>
              <label for="acessorio{{this.id}}">{{this.nome}}</label><br><br>
         {{/each}}
     {{!-- <input type="text" id="acessorios" name="acessorios" value="{{carro_editing.acessorios}}"><br><br> --}}
