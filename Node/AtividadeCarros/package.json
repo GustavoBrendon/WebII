@@ -12,6 +12,7 @@
   "author": "Rosinei Figueiredo",
   "license": "ISC",
   "dependencies": {
+    "@sequelize/postgres": "^7.0.0-alpha.46",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.2",
     "mysql2": "^3.14.1",
