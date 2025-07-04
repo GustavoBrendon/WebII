@@ -11,4 +11,4 @@ import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize('postgresql://projeto_carros_user:zPzmM99Y8lfMKvUPzAN37AK99Nr0JRVh@dpg-d1is273ipnbc7382v310-a/projeto_carros_db');
 
-export default sequelize; 
+export default sequelize;  
