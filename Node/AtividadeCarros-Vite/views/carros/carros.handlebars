@@ -1,0 +1,116 @@
+<h1>Carros</h1>
+<form action="/carros/{{#if action }}save{{else}}create{{/if}}" method="post">
+    <input type="hidden" name="id" value="{{carro_editing.id}}">
+    <label for="marca">Marca</label><br>
+    <input type="text" id="marca" name="marca" value="{{carro_editing.marca}}" required><br><br>
+
+    <label for="modelo">Modelo</label><br>
+    <input type="text" id="modelo" name="modelo" value="{{carro_editing.modelo}}" required><br><br>
+
+    <label for="fabricante">Fabricante</label><br>
+    <input type="text" id="fabricante" name="fabricante" value="{{carro_editing.fabricante}}" required><br><br>
+
+    <label for="preco">Preço</label><br>
+    <input type="number" id="preco" name="preco" value="{{carro_editing.preco}}" required><br><br>
+
+    <label for="ano">Ano</label><br>
+    <input type="number" id="ano" name="ano" value="{{carro_editing.ano}}" required><br><br>
+
+    <label for="MotoristaId">Motoristas</label><br>
+    <select name="MotoristaId" id="MotoristaId">
+        {{#each motoristas}}
+            <option value="{{this.id}}" {{#if (eq this.id ../carro_editing.MotoristId)}}selected{{/if}}>{{this.nome}}</option>
+        {{/each}}
+    </select><br><br>
+        
+    {{!-- <input type="number" id="MotoristaId" name="MotoristaId" value="{{carro_editing.MotoristaId}}"><br><br> --}}
+
+    <label>Acessorios</label><br>
+        {{#each acessorios}}
+            <input type="checkbox" id="acessorio{{this.id}}"  
+             name="acessorios" value="{{this.id}}" {{#if (contains ../carro_editing.acessorios this.id)}}checked{{/if}}>
+             <label for="acessorio{{this.id}}">{{this.nome}}</label><br><br>
+        {{/each}}
+    {{!-- <input type="text" id="acessorios" name="acessorios" value="{{carro_editing.acessorios}}"><br><br> --}}
+
+    <button>{{#if action }}Editar{{else}}Criar{{/if}}</button>
+
+</form>
+
+<hr>
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th>Marca</th>
+
+            <th>Modelo</th>
+
+            <th>Fabricante</th>
+
+            <th>Preço</th>
+
+            <th>Ano</th>
+
+            <th>Motorista</th>
+
+            <th>Acessorios</th>
+
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {{#each carros}}
+
+        <tr>
+
+            <td>{{this.marca}}</td>
+
+            <td>{{this.modelo}}</td>
+
+            <td>{{this.fabricante}}</td>
+
+            <td>{{this.preco}}</td>
+
+            <td>{{this.ano}}</td>
+
+            <td>{{this.Motoristum.nome}}</td>
+
+            <td>{{#each this.Acessorios}}
+                {{this.nome}} 
+                {{#unless @last}} - {{/unless}}
+                {{/each}}</td>
+
+            <td style="display: flex; justify-content: space-evenly;">
+
+                <form action="/carros/edit" method="post">
+
+                    <input type="hidden" name="id" value="{{this.id}}">
+
+                    <button>Edit</button>
+
+                </form>
+
+                <form action="/carros/delete" method="post">
+
+                    <input type="hidden" name="id" value="{{this.id}}">
+
+                    <button>Del</button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {{/each}}
+
+    </tbody>
+
+</table>

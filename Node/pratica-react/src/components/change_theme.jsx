@@ -9,8 +9,6 @@ const ChangeTheme = ({ theme, setTheme }) => {
 
       <label htmlFor="dark">Theme: </label>
 
-      <label>Theme: </label>
-
       <input
         type="radio"
         name="theme"

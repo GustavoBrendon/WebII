@@ -1,0 +1,66 @@
+<h1>Acessorios</h1>
+<form action="/acessorios/{{#if action }}save{{else}}create{{/if}}" method="post">
+    <input type="hidden" name="id" value="{{motorista_editing.id}}">
+    <label for="nome">Nome</label><br>
+    <input type="text" id="nome" name="nome" value="{{carro_editing.nome}}" required><br><br>
+
+    <label for="utilidade">Utilidade</label><br>
+    <input type="text" id="utilidade" name="utilidade" value="{{carro_editing.utilidade}}" required><br><br>
+
+    <button>{{#if action }}Editar{{else}}Criar{{/if}}</button>
+
+</form>
+
+<hr>
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th>Nome</th>
+
+            <th>Utilidade</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {{#each acessorios}}
+
+        <tr>
+
+            <td>{{this.nome}}</td>
+
+            <td>{{this.utilidade}}</td>
+
+            <td style="display: flex; justify-content: space-evenly;">
+
+                <form action="/acessorios/edit" method="post">
+
+                    <input type="hidden" name="id" value="{{this.id}}">
+
+                    <button>Edit</button>
+
+                </form>
+
+                <form action="/acessorios/delete" method="post">
+
+                    <input type="hidden" name="id" value="{{this.id}}">
+
+                    <button>Del</button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {{/each}}
+
+    </tbody>
+
+</table>

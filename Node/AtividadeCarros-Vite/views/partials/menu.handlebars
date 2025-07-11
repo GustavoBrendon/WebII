@@ -1,0 +1,28 @@
+<nav>
+
+    <ul style="display: flex; justify-content: start; list-style: none;">
+
+        <li><a href="/">Home</a>&nbsp;</li>
+
+        <li><a href="/carros">Carros</a>&nbsp;</li>
+
+        <li><a href="/motoristas">Motoristas</a>&nbsp;</li>
+
+        <li><a href="/acessorios">Acessorios</a>&nbsp;</li>
+
+        {{#if user}}
+
+        <li><a href="/users/logout">Sair</a>&nbsp;</li>
+
+        {{else}}
+
+        <li><a href="/users/login">Entrar</a>&nbsp;</li>
+
+        <li><a href="/users/register">Registrar</a>&nbsp;</li>
+
+        {{/if}}
+
+    </ul>
+
+</nav>
+
